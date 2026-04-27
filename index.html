@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognify — Task 2: JavaScript</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ── HEADER ─────────────────────── -->
+  <header class="site-header">
+    <div class="badge">Cognify · Level 1</div>
+    <h1>Task 2 <span>JavaScript</span></h1>
+    <p class="subtitle">Three interactive components built with vanilla JS</p>
+  </header>
+
+  <main class="grid">
+
+    <!-- ── CARD 1 · COLOR BUTTON ─────── -->
+    <section class="card" id="card-color">
+      <div class="card-label">01</div>
+      <h2>Color Shifter</h2>
+      <p class="card-desc">Click the button to cycle through vivid colors with a smooth transition.</p>
+
+      <div class="demo-area">
+        <button id="colorBtn" class="color-btn" onclick="changeColor()">
+          <span class="btn-text">Click me!</span>
+          <span class="btn-ripple"></span>
+        </button>
+        <p class="color-name" id="colorName">—</p>
+      </div>
+
+      <details class="code-block">
+        <summary>View JS</summary>
+        <pre><code>const colors = [
+  { hex: '#e63946', name: 'Crimson' },
+  { hex: '#2a9d8f', name: 'Teal' },
+  { hex: '#e9c46a', name: 'Saffron' },
+  { hex: '#6a4c93', name: 'Violet' },
+  { hex: '#f4a261', name: 'Tangerine' },
+];
+let idx = 0;
+
+function changeColor() {
+  idx = (idx + 1) % colors.length;
+  const btn = document.getElementById('colorBtn');
+  btn.style.background = colors[idx].hex;
+  document.getElementById('colorName').textContent
+    = colors[idx].name;
+}</code></pre>
+      </details>
+    </section>
+
+    <!-- ── CARD 2 · GREETING ALERT ───── -->
+    <section class="card" id="card-greet">
+      <div class="card-label">02</div>
+      <h2>Time Greeter</h2>
+      <p class="card-desc">Displays a greeting based on the current time of day — no alert box needed.</p>
+
+      <div class="demo-area">
+        <div class="clock-display" id="clockDisplay">--:--:--</div>
+        <div class="greeting-box" id="greetingBox">
+          <span class="greeting-icon" id="greetIcon">🌅</span>
+          <span class="greeting-text" id="greetText">Loading...</span>
+        </div>
+        <button class="greet-btn" onclick="showGreeting()">Get Greeting</button>
+      </div>
+
+      <details class="code-block">
+        <summary>View JS</summary>
+        <pre><code>function showGreeting() {
+  const hour = new Date().getHours();
+  let msg, icon;
+
+  if (hour >= 5 && hour < 12) {
+    msg = 'Good Morning! Rise & shine ☀️';
+    icon = '🌅';
+  } else if (hour >= 12 && hour < 17) {
+    msg = 'Good Afternoon! Hope your day is great 🌤️';
+    icon = '🌤️';
+  } else if (hour >= 17 && hour < 21) {
+    msg = 'Good Evening! Time to unwind 🌇';
+    icon = '🌇';
+  } else {
+    msg = 'Good Night! Sweet dreams 🌙';
+    icon = '🌙';
+  }
+
+  document.getElementById('greetText').textContent = msg;
+  alert(msg); // original alert version
+}</code></pre>
+      </details>
+    </section>
+
+    <!-- ── CARD 3 · CALCULATOR ────────── -->
+    <section class="card" id="card-calc">
+      <div class="card-label">03</div>
+      <h2>Add Calculator</h2>
+      <p class="card-desc">Enter two numbers and hit Add to see the sum displayed instantly.</p>
+
+      <div class="demo-area">
+        <div class="calc-row">
+          <input type="number" id="num1" placeholder="First number" class="calc-input"/>
+          <span class="plus-sign">+</span>
+          <input type="number" id="num2" placeholder="Second number" class="calc-input"/>
+        </div>
+        <button class="calc-btn" onclick="addNumbers()">= Calculate</button>
+        <div class="result-display" id="result">
+          <span class="result-label">Result</span>
+          <span class="result-value" id="resultVal">—</span>
+        </div>
+      </div>
+
+      <details class="code-block">
+        <summary>View JS</summary>
+        <pre><code>function addNumbers() {
+  const a = parseFloat(
+    document.getElementById('num1').value
+  );
+  const b = parseFloat(
+    document.getElementById('num2').value
+  );
+
+  if (isNaN(a) || isNaN(b)) {
+    document.getElementById('resultVal')
+      .textContent = 'Enter valid numbers!';
+    return;
+  }
+
+  const sum = a + b;
+  document.getElementById('resultVal')
+    .textContent = sum;
+}</code></pre>
+      </details>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    Cognify Internship · Level 1 · Task 2 · Built with Vanilla JS
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
